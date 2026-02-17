@@ -14,6 +14,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://checkpoint.gshell.fr'),
   title: 'Checkpoint — Track Your Manga, Manhwa & Manhua Reading Progress',
   description:
     'Checkpoint is a free Chrome extension that tracks your manga, manhwa, and manhua reading progress across any website. One click saves where you left off — no accounts, no manual updates. Features auto-detection, alternative name matching, new chapter notifications, and import/export.',
@@ -33,14 +34,21 @@ export const metadata: Metadata = {
     'mangadex',
     'one piece tracker',
     'solo leveling tracker',
+    'manga progress tracker',
+    'manga extension',
+    'free manga tracker',
   ],
   authors: [{ name: 'elghaied' }],
   creator: 'elghaied',
+  icons: {
+    icon: '/checkpoint.ico',
+    shortcut: '/checkpoint.ico',
+  },
   openGraph: {
     title: 'Checkpoint — Track Your Manga, Manhwa & Manhua Reading Progress',
     description:
       'Free Chrome extension to track your manga, manhwa, and manhua reading progress across any website. One click. No accounts.',
-    url: 'https://checkpoint-manga.vercel.app',
+    url: 'https://checkpoint.gshell.fr',
     siteName: 'Checkpoint',
     type: 'website',
     locale: 'en_US',
@@ -72,7 +80,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://checkpoint-manga.vercel.app',
+    canonical: 'https://checkpoint.gshell.fr',
   },
 }
 
