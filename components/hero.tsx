@@ -8,7 +8,7 @@ export function Hero() {
       {/* Subtle background glow */}
       <div
         className="pointer-events-none absolute top-0 left-1/2 -z-10 h-[600px] w-[600px] -translate-x-1/2 rounded-full opacity-20 blur-[120px]"
-        style={{ background: "radial-gradient(circle, oklch(0.78 0.16 65), transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, #e94560, transparent 70%)" }}
         aria-hidden="true"
       />
 
@@ -60,7 +60,7 @@ export function Hero() {
         <div className="relative flex-1">
           <div className="relative mx-auto max-w-md overflow-hidden rounded-2xl border border-border shadow-2xl shadow-primary/5">
             <Image
-              src="/images/hero-manga.jpg"
+              src="/images/hero-manga.png"
               alt="A reader tracking their manga progress with Checkpoint"
               width={500}
               height={600}

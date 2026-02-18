@@ -27,7 +27,7 @@ export function Contribute() {
     <section id="contribute" className="border-t border-border py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="mb-4 inline-block rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-xs font-medium tracking-wide text-accent">
+          <span className="mb-4 inline-block rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-medium tracking-wide text-primary">
             Open Source
           </span>
           <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground md:text-4xl">
@@ -46,7 +46,7 @@ export function Contribute() {
               key={step.title}
               className="relative flex flex-col items-center rounded-xl border border-border bg-card p-8 text-center"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 text-accent">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
                 <step.icon className="h-6 w-6" />
               </div>
               <span className="mb-1 font-mono text-xs text-muted-foreground">

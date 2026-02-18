@@ -4,40 +4,40 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Dark manga-inspired theme — deep charcoal base with warm amber accent */
-  --background: oklch(0.13 0.005 260);
-  --foreground: oklch(0.95 0.01 80);
-  --card: oklch(0.17 0.005 260);
-  --card-foreground: oklch(0.95 0.01 80);
-  --popover: oklch(0.17 0.005 260);
-  --popover-foreground: oklch(0.95 0.01 80);
-  --primary: oklch(0.78 0.16 65);
-  --primary-foreground: oklch(0.13 0.005 260);
-  --secondary: oklch(0.22 0.01 260);
-  --secondary-foreground: oklch(0.88 0.02 80);
-  --muted: oklch(0.22 0.01 260);
-  --muted-foreground: oklch(0.65 0.02 80);
-  --accent: oklch(0.72 0.12 185);
-  --accent-foreground: oklch(0.13 0.005 260);
+  /* Dark navy theme — matching the Checkpoint Chrome extension palette */
+  --background: #1a1a2e;
+  --foreground: #eaeaea;
+  --card: #16213e;
+  --card-foreground: #eaeaea;
+  --popover: #16213e;
+  --popover-foreground: #eaeaea;
+  --primary: #e94560;
+  --primary-foreground: #eaeaea;
+  --secondary: #16213e;
+  --secondary-foreground: #eaeaea;
+  --muted: #16213e;
+  --muted-foreground: #a0a0a0;
+  --accent: #0f3460;
+  --accent-foreground: #eaeaea;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.25 0.01 260);
-  --input: oklch(0.25 0.01 260);
-  --ring: oklch(0.78 0.16 65);
-  --chart-1: oklch(0.78 0.16 65);
-  --chart-2: oklch(0.72 0.12 185);
-  --chart-3: oklch(0.65 0.15 330);
-  --chart-4: oklch(0.7 0.14 140);
-  --chart-5: oklch(0.75 0.13 40);
+  --border: #2a2a4a;
+  --input: #2a2a4a;
+  --ring: #e94560;
+  --chart-1: #e94560;
+  --chart-2: #0f3460;
+  --chart-3: #ff6b6b;
+  --chart-4: #16213e;
+  --chart-5: #2a2a4a;
   --radius: 0.75rem;
-  --sidebar: oklch(0.15 0.005 260);
-  --sidebar-foreground: oklch(0.95 0.01 80);
-  --sidebar-primary: oklch(0.78 0.16 65);
-  --sidebar-primary-foreground: oklch(0.13 0.005 260);
-  --sidebar-accent: oklch(0.22 0.01 260);
-  --sidebar-accent-foreground: oklch(0.95 0.01 80);
-  --sidebar-border: oklch(0.25 0.01 260);
-  --sidebar-ring: oklch(0.78 0.16 65);
+  --sidebar: #1a1a2e;
+  --sidebar-foreground: #eaeaea;
+  --sidebar-primary: #e94560;
+  --sidebar-primary-foreground: #eaeaea;
+  --sidebar-accent: #16213e;
+  --sidebar-accent-foreground: #eaeaea;
+  --sidebar-border: #2a2a4a;
+  --sidebar-ring: #e94560;
 }
 
 @theme inline {
