@@ -63,7 +63,7 @@ const heroBlocks = [
     body: "Open the side panel, hit the + button, and Checkpoint figures out the rest. It reads page metadata to detect the title and chapter number \u2014 no manual entry, no copy-pasting URLs. It works on MangaDex, Webtoon, Tapas, MangaPlus, raw scanlation sites, and basically anything with a chapter number in the page.",
     detail:
       "And if a site uses a weird title? Add an alternative name once, and Checkpoint recognizes it forever.",
-    image: "/images/list-view-adding-titles.png",
+    image: "/images/general-view.png",
     imageAlt: "Checkpoint detecting and adding a manga title",
   },
   {
