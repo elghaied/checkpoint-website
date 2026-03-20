@@ -6,66 +6,65 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { MangaSectionHeader } from "@/components/manga-section-header"
 
 const faqs = [
   {
-    question: "Is Checkpoint free?",
-    answer:
-      "Yes, Checkpoint is completely free and open source under the MIT License. There are no paid tiers, ads, or hidden costs.",
+    q: "Is Checkpoint actually free?",
+    a: "Yes. Completely free, open source under MIT, no paid tiers, no ads, no upsell. It will stay that way.",
   },
   {
-    question: "Does Checkpoint require an account?",
-    answer:
-      "No. All your data is stored locally in your browser using Chrome storage. There is no sign-up, no login, and no server involved.",
+    q: "Does it need an account?",
+    a: "Nope. All data is stored locally in your browser. No sign-up, no login, no server.",
   },
   {
-    question: "Which manga reading sites does Checkpoint support?",
-    answer:
-      "Checkpoint works on virtually any manga reading website. It uses smart heuristics to extract the title and chapter from the page. It has been tested on MangaDex, Webtoon, Tapas, MangaPlus, and many generic manga reader sites.",
+    q: "Which sites does it work on?",
+    a: "Virtually any manga reading site. Uses smart page metadata extraction. Tested on MangaDex, Webtoon, Tapas, MangaPlus, and dozens of generic manga reader sites.",
   },
   {
-    question: "What happens if a title isn't detected automatically?",
-    answer:
-      "Checkpoint shows a search modal where you can manually type the correct title. You can also use the \"Find Alternative Names\" button to search Google. Once you select the correct match, the original undetected name is saved as an alternative so it's recognized automatically next time.",
+    q: "What if a title isn\u2019t detected?",
+    a: "Checkpoint shows a search modal where you can type the title manually or use \u2018Find Alternative Names\u2019 to search Google. Once you pick the right match, the undetected name is saved as an alternative so it\u2019s recognized automatically next time.",
   },
   {
-    question: "Can I back up my reading list?",
-    answer:
-      "Absolutely. Checkpoint has built-in import and export functionality. You can save your entire list to a file for backup, or share it with friends.",
+    q: "How do tags and lists work?",
+    a: "Custom tags with auto-assigned colors. Built-in lists: Reading, Completed, Plan to Read. Create custom lists too. Tri-state filtering: click once for include (AND), twice for include (OR), three times for exclude.",
   },
   {
-    question: "How do new chapter notifications work?",
-    answer:
-      "Checkpoint periodically checks AniList and MangaDex APIs for the latest chapter counts. You can enable notifications per title by clicking the bell icon. Note: this feature depends on API data quality, which can sometimes be incomplete for ongoing series.",
+    q: "Can I import my existing reading list?",
+    a: "Yes. CSV bulk import with batch matching against AniList and MangaDex with confidence scoring. Also full JSON backup/restore for moving between machines.",
   },
   {
-    question: "Is my data private?",
-    answer:
-      "Yes. All data is stored locally in your browser. Checkpoint only makes network requests to AniList and MangaDex for metadata lookups. There is no tracking, analytics, or telemetry.",
+    q: "How do chapter notifications work?",
+    a: "Checks AniList and MangaDex APIs every 60 minutes for titles with notifications enabled. Accuracy depends on API data quality.",
+  },
+  {
+    q: "Is my data private?",
+    a: "Yes. All local. Only network requests are to AniList and MangaDex for metadata lookups. No telemetry, no analytics, no data collection.",
+  },
+  {
+    q: "What\u2019s the side panel?",
+    a: "Chrome\u2019s Side Panel API \u2014 opens as a panel on the side of your browser, not a popup or new tab. Read while managing your list.",
   },
 ]
 
 export function FAQ() {
   return (
-    <section id="faq" className="py-20 md:py-32">
-      <div className="mx-auto max-w-3xl px-6">
-        <div className="mb-12 text-center">
-          <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-            Frequently asked questions
-          </h2>
-          <p className="mt-4 text-pretty leading-relaxed text-muted-foreground">
-            Everything you need to know about Checkpoint.
-          </p>
-        </div>
+    <section id="faq" className="py-24 md:py-32">
+      <div className="mx-auto max-w-3xl px-4">
+        <MangaSectionHeader number="03" label="FAQ" title="QUESTIONS? ANSWERS." />
 
-        <Accordion type="single" collapsible className="w-full">
-          {faqs.map((faq, index) => (
-            <AccordionItem key={index} value={`faq-${index}`}>
-              <AccordionTrigger className="text-left text-base font-medium text-foreground">
-                {faq.question}
+        <Accordion type="single" collapsible className="space-y-2">
+          {faqs.map((faq, i) => (
+            <AccordionItem
+              key={i}
+              value={`faq-${i}`}
+              className="border-2 border-border rounded-sm px-4 data-[state=open]:border-l-primary data-[state=open]:border-l-4"
+            >
+              <AccordionTrigger className="text-left font-bold hover:no-underline">
+                {faq.q}
               </AccordionTrigger>
-              <AccordionContent className="leading-relaxed text-muted-foreground">
-                {faq.answer}
+              <AccordionContent className="text-muted-foreground">
+                {faq.a}
               </AccordionContent>
             </AccordionItem>
           ))}
@@ -75,25 +74,24 @@ export function FAQ() {
   )
 }
 
-/* JSON-LD structured data for SEO */
 export function FAQSchema() {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  }
-
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.q,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.a,
+            },
+          })),
+        }),
+      }}
     />
   )
 }
