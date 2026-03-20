@@ -4,43 +4,62 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Dark navy theme — matching the Checkpoint Chrome extension palette */
-  --background: #1a1a2e;
-  --foreground: #eaeaea;
-  --card: #16213e;
-  --card-foreground: #eaeaea;
-  --popover: #16213e;
-  --popover-foreground: #eaeaea;
-  --primary: #e94560;
-  --primary-foreground: #eaeaea;
-  --secondary: #16213e;
-  --secondary-foreground: #eaeaea;
-  --muted: #16213e;
-  --muted-foreground: #a0a0a0;
-  --accent: #0f3460;
-  --accent-foreground: #eaeaea;
+  /* Manga-ink dark theme */
+  --background: #0d0d0f;
+  --background-inset: #0a0a0c;
+  --foreground: #f0ece4;
+  --card: #141418;
+  --card-foreground: #f0ece4;
+  --popover: #141418;
+  --popover-foreground: #f0ece4;
+  --primary: #ff2d55;
+  --primary-glow: #ff2d5540;
+  --primary-foreground: #f0ece4;
+  /* Note: spec's "Secondary" (#00d4ff cyan) is mapped to --cyan below.
+     shadcn's --secondary slot stays as muted bg to match its typical usage
+     for secondary buttons/containers. Use text-cyan / border-cyan for the
+     spec's cyan accent. */
+  --secondary: #1a1a20;
+  --secondary-foreground: #f0ece4;
+  --muted: #1a1a20;
+  --muted-foreground: #8a8694;
+  --accent: #ffb800;
+  --accent-foreground: #0d0d0f;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: #2a2a4a;
-  --input: #2a2a4a;
-  --ring: #e94560;
-  --chart-1: #e94560;
-  --chart-2: #0f3460;
-  --chart-3: #ff6b6b;
-  --chart-4: #16213e;
-  --chart-5: #2a2a4a;
-  --radius: 0.75rem;
-  --sidebar: #1a1a2e;
-  --sidebar-foreground: #eaeaea;
-  --sidebar-primary: #e94560;
-  --sidebar-primary-foreground: #eaeaea;
-  --sidebar-accent: #16213e;
-  --sidebar-accent-foreground: #eaeaea;
-  --sidebar-border: #2a2a4a;
-  --sidebar-ring: #e94560;
+  --border: #2a2a32;
+  --input: #2a2a32;
+  --ring: #ff2d55;
+  --radius: 0.25rem;
+
+  /* Custom tokens */
+  --cyan: #00d4ff;
+  --state-and: #22c55e;
+  --state-or: #3b82f6;
+  --state-exclude: #ef4444;
+  --halftone-color: #ff2d5512;
+  --speed-line-color: #ffffff08;
+
+  /* Chart colors */
+  --chart-1: #ff2d55;
+  --chart-2: #00d4ff;
+  --chart-3: #ffb800;
+  --chart-4: #141418;
+  --chart-5: #2a2a32;
+
+  /* Sidebar */
+  --sidebar: #0d0d0f;
+  --sidebar-foreground: #f0ece4;
+  --sidebar-primary: #ff2d55;
+  --sidebar-primary-foreground: #f0ece4;
+  --sidebar-accent: #141418;
+  --sidebar-accent-foreground: #f0ece4;
+  --sidebar-border: #2a2a32;
+  --sidebar-ring: #ff2d55;
 }
 
 @theme inline {
+  --font-display: var(--font-space-grotesk), 'Space Grotesk', system-ui, sans-serif;
   --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
   --color-background: var(--background);
@@ -67,6 +86,7 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-cyan: var(--cyan);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -88,4 +108,160 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* ============================================
+   MANGA CSS UTILITIES
+   ============================================ */
+
+/* Halftone dot pattern overlay */
+.manga-halftone {
+  position: relative;
+}
+
+.manga-halftone::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, var(--halftone-color) 1px, transparent 1px);
+  background-size: 8px 8px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.manga-halftone-fade::after {
+  mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+}
+
+/* Speed line radial overlay */
+.manga-speed-lines {
+  position: relative;
+  overflow: hidden;
+}
+
+.manga-speed-lines::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: repeating-conic-gradient(
+    var(--speed-line-color) 0deg,
+    transparent 0.5deg,
+    transparent 4deg,
+    var(--speed-line-color) 4.5deg
+  );
+  mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Diagonal section clip paths */
+.manga-clip-top {
+  clip-path: polygon(0 30px, 100% 0, 100% 100%, 0 100%);
+}
+
+.manga-clip-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), 0 100%);
+}
+
+.manga-clip-both {
+  clip-path: polygon(0 30px, 100% 0, 100% calc(100% - 30px), 0 100%);
+}
+
+@media (max-width: 768px) {
+  .manga-clip-top {
+    clip-path: polygon(0 20px, 100% 0, 100% 100%, 0 100%);
+  }
+  .manga-clip-bottom {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), 0 100%);
+  }
+  .manga-clip-both {
+    clip-path: polygon(0 20px, 100% 0, 100% calc(100% - 20px), 0 100%);
+  }
+}
+
+/* Panel border with offset shadow */
+.manga-panel-offset {
+  border: 2px solid rgba(240, 236, 228, 0.2);
+  box-shadow: 6px 6px 0 0 var(--primary);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.manga-panel-offset:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 0 var(--primary);
+}
+
+/* Manga badge pill */
+.manga-badge {
+  font-weight: 700;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+  box-shadow: 2px 2px 0 var(--foreground);
+}
+
+/* Screenshot double-border frame */
+.manga-frame {
+  border: 3px solid var(--foreground);
+  outline: 1px solid var(--foreground);
+  outline-offset: 4px;
+  border-radius: 0;
+}
+
+/* Scroll entrance animation with staggered delays */
+.manga-enter {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition-delay: calc(var(--stagger, 0) * 80ms);
+}
+
+.manga-enter.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Outlined text effect */
+.text-outline-primary {
+  -webkit-text-stroke: 2px var(--primary);
+  color: transparent;
+}
+
+/* Manga button styles (overlay on shadcn Button — do NOT edit button.tsx) */
+.manga-btn-primary {
+  background-color: var(--primary) !important;
+  color: var(--foreground) !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 2px solid var(--primary);
+  border-radius: var(--radius);
+  box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.5);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.manga-btn-primary:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.5);
+}
+
+.manga-btn-primary:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.5);
+}
+
+.manga-btn-secondary {
+  background-color: transparent !important;
+  border: 2px solid rgba(240, 236, 228, 0.4);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.manga-btn-secondary:hover {
+  border-color: var(--primary);
+  color: var(--primary);
 }
