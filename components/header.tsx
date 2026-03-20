@@ -1,93 +1,91 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
-import { BookOpen, Menu, X } from "lucide-react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { Menu, X } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 const navLinks = [
   { href: "#features", label: "Features" },
-  { href: "#how-it-works", label: "How It Works" },
   { href: "#screenshots", label: "Screenshots" },
-  { href: "#story", label: "Why Checkpoint" },
-  { href: "#contribute", label: "Contribute" },
+  { href: "#story", label: "Story" },
+  { href: "#faq", label: "FAQ" },
+  { href: "https://github.com/elghaied/checkpoint", label: "GitHub", external: true },
 ]
+
+const CHROME_STORE_URL =
+  "https://chromewebstore.google.com/detail/checkpoint/bomngiemgfgjnlpanapgbeimmihnjaka"
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
-    <header className="fixed top-0 right-0 left-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-md">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center gap-2" aria-label="Checkpoint home">
-    
-          <img src="/checkpoint-logo.svg" alt="Checkpoint logo" className="h-8 w-8" />
-          <span className="text-lg font-bold tracking-tight text-foreground">Checkpoint</span>
-        </Link>
+    <header className="sticky top-0 z-50 border-b-2 border-primary bg-background/90 backdrop-blur-sm">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+        {/* Logo */}
+        <a href="#" className="flex items-center gap-2">
+          <Image
+            src="/images/checkpoint-logo.png"
+            alt="Checkpoint"
+            width={28}
+            height={28}
+          />
+          <span className="font-display text-lg font-bold uppercase tracking-tight">
+            Checkpoint
+          </span>
+        </a>
 
         {/* Desktop nav */}
-        <ul className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-6 md:flex">
           {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        <div className="hidden md:block">
-          <Button asChild size="sm">
             <a
-              href="https://chromewebstore.google.com/detail/checkpoint/bomngiemgfgjnlpanapgbeimmihnjaka"
-              target="_blank"
-              rel="noopener noreferrer"
+              key={link.href}
+              href={link.href}
+              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             >
-              Install Free
+              {link.label}
+            </a>
+          ))}
+          <Button asChild className={cn("manga-btn-primary h-9 px-4 text-xs")}>
+            <a href={CHROME_STORE_URL} target="_blank" rel="noopener noreferrer">
+              Add to Chrome — it&apos;s free
             </a>
           </Button>
-        </div>
+        </nav>
 
         {/* Mobile toggle */}
         <button
-          className="text-foreground md:hidden"
+          className="md:hidden text-foreground"
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-label="Toggle menu"
         >
-          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
-      </nav>
+      </div>
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="border-t border-border bg-background px-6 pb-6 md:hidden">
-          <ul className="flex flex-col gap-4 pt-4">
+        <div className="border-t border-border bg-background px-4 pb-4 md:hidden">
+          <nav className="flex flex-col gap-3 pt-3">
             {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-4">
-            <Button asChild size="sm" className="w-full">
               <a
-                href="https://chromewebstore.google.com/detail/checkpoint/bomngiemgfgjnlpanapgbeimmihnjaka"
-                target="_blank"
-                rel="noopener noreferrer"
+                key={link.href}
+                href={link.href}
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                onClick={() => setMobileOpen(false)}
+                {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               >
-                Install Free
+                {link.label}
+              </a>
+            ))}
+            <Button asChild className={cn("manga-btn-primary mt-2 h-9 text-xs")}>
+              <a href={CHROME_STORE_URL} target="_blank" rel="noopener noreferrer">
+                Add to Chrome — it&apos;s free
               </a>
             </Button>
-          </div>
+          </nav>
         </div>
       )}
     </header>
