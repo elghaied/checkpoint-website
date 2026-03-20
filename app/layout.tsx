@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
@@ -13,11 +13,17 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-jetbrains-mono',
 })
 
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  weight: ['700'],
+})
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://checkpoint.gshell.fr'),
-  title: 'Checkpoint — Track Your Manga, Manhwa & Manhua Reading Progress',
+  title: 'Checkpoint — Manga Tracker for Chrome | Track Manga, Manhwa & Manhua Progress',
   description:
-    'Checkpoint is a free Chrome extension that tracks your manga, manhwa, and manhua reading progress across any website. One click saves where you left off — no accounts, no manual updates. Features auto-detection, alternative name matching, new chapter notifications, and import/export.',
+    'Free Chrome extension that tracks your manga, manhwa, and manhua reading progress with one click. Tags, custom lists, tri-state filtering, chapter notifications, CSV import. 100% local, no accounts, open source.',
   keywords: [
     'manga tracker',
     'manhwa tracker',
@@ -37,6 +43,11 @@ export const metadata: Metadata = {
     'manga progress tracker',
     'manga extension',
     'free manga tracker',
+    'manga tag system',
+    'manga list organizer',
+    'csv manga import',
+    'chrome side panel extension',
+    'tri-state filter manga',
   ],
   authors: [{ name: 'elghaied' }],
   creator: 'elghaied',
@@ -45,7 +56,7 @@ export const metadata: Metadata = {
     shortcut: '/checkpoint.ico',
   },
   openGraph: {
-    title: 'Checkpoint — Track Your Manga, Manhwa & Manhua Reading Progress',
+    title: 'Checkpoint — Manga Tracker for Chrome | Track Manga, Manhwa & Manhua Progress',
     description:
       'Free Chrome extension to track your manga, manhwa, and manhua reading progress across any website. One click. No accounts.',
     url: 'https://checkpoint.gshell.fr',
@@ -63,7 +74,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Checkpoint — Track Your Manga, Manhwa & Manhua Reading Progress',
+    title: 'Checkpoint — Manga Tracker for Chrome | Track Manga, Manhwa & Manhua Progress',
     description:
       'Free Chrome extension to track manga reading across any website. One click. No accounts.',
     images: ['/images/og-image.png'],
@@ -85,7 +96,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#1a1a2e',
+  themeColor: '#0d0d0f',
   width: 'device-width',
   initialScale: 1,
 }
@@ -96,7 +107,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable}`}>
       <body className="font-sans antialiased">
         {children}
         <Analytics />
