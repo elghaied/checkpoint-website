@@ -1,16 +1,13 @@
 import { Header } from "@/components/header"
 import { Hero } from "@/components/hero"
-import { Features } from "@/components/features"
-import { HowItWorks } from "@/components/how-it-works"
-import { Screenshots } from "@/components/screenshots"
-import { SupportedSites } from "@/components/supported-sites"
 import { Story } from "@/components/story"
+import { Features } from "@/components/features"
+import { Screenshots } from "@/components/screenshots"
+import { Privacy } from "@/components/privacy"
 import { FAQ, FAQSchema } from "@/components/faq"
 import { Contribute } from "@/components/contribute"
-import { CTA } from "@/components/cta"
 import { Footer } from "@/components/footer"
 
-// v2: Chrome Web Store links + Contribute section
 export default function Page() {
   return (
     <>
@@ -31,7 +28,7 @@ export default function Page() {
               priceCurrency: "USD",
             },
             description:
-              "A Chrome extension that tracks your manga, manhwa, and manhua reading progress across any website with one click.",
+              "Free Chrome extension that tracks your manga, manhwa, and manhua reading progress with one click. Tags, custom lists, tri-state filtering, chapter notifications, CSV import. 100% local, no accounts, open source.",
             softwareVersion: "0.3.0",
             author: {
               "@type": "Person",
@@ -39,18 +36,22 @@ export default function Page() {
               url: "https://github.com/elghaied",
             },
             url: "https://github.com/elghaied/checkpoint",
-            downloadUrl: "https://chromewebstore.google.com/detail/checkpoint/bomngiemgfgjnlpanapgbeimmihnjaka",
-            screenshot: "/images/screenshot-list.jpg",
+            downloadUrl:
+              "https://chromewebstore.google.com/detail/checkpoint/bomngiemgfgjnlpanapgbeimmihnjaka",
+            screenshot: "/images/list-view.png",
             featureList: [
               "One-click reading progress tracking",
               "Auto-detection of manga title and chapter",
+              "Custom tags with auto-assigned colors",
+              "Custom lists (Reading, Completed, Plan to Read)",
+              "Tri-state tag filtering (AND/OR/Exclude)",
+              "New chapter notifications via AniList and MangaDex",
+              "CSV bulk import with confidence scoring",
+              "Full JSON backup and restore",
+              "Chrome Side Panel UI",
               "Alternative name matching",
-              "New chapter notifications",
-              "Format tabs (Manga, Manhwa, Manhua)",
-              "Import and export reading lists",
-              "Search and filter functionality",
-              "AniList and MangaDex integration",
               "100% local storage, no accounts required",
+              "Open source, MIT licensed",
             ],
           }),
         }}
@@ -60,14 +61,12 @@ export default function Page() {
 
       <main>
         <Hero />
-        <Features />
-        <HowItWorks />
-        <Screenshots />
-        <SupportedSites />
         <Story />
+        <Features />
+        <Screenshots />
+        <Privacy />
         <FAQ />
         <Contribute />
-        <CTA />
       </main>
 
       <Footer />
