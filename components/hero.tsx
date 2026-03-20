@@ -1,73 +1,109 @@
+"use client"
+
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Chrome, Github } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { useInView } from "@/hooks/use-in-view"
+
+const CHROME_STORE_URL =
+  "https://chromewebstore.google.com/detail/checkpoint/bomngiemgfgjnlpanapgbeimmihnjaka"
+const GITHUB_URL = "https://github.com/elghaied/checkpoint"
+
+const steps = [
+  {
+    num: "01",
+    title: "Read anywhere",
+    desc: "MangaDex, Webtoon, Tapas, raw scanlation sites, whatever.",
+  },
+  {
+    num: "02",
+    title: "Click the + button",
+    desc: "Auto-detects title and chapter from the page.",
+  },
+  {
+    num: "03",
+    title: "That's it. Seriously.",
+    desc: "Saved locally forever. Pick up where you left off.",
+  },
+]
 
 export function Hero() {
+  const { ref, inView } = useInView()
+
   return (
-    <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-32">
-      {/* Subtle background glow */}
-      <div
-        className="pointer-events-none absolute top-0 left-1/2 -z-10 h-[600px] w-[600px] -translate-x-1/2 rounded-full opacity-20 blur-[120px]"
-        style={{ background: "radial-gradient(circle, #e94560, transparent 70%)" }}
-        aria-hidden="true"
-      />
-
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-12 px-6 lg:flex-row lg:gap-16">
-        {/* Copy */}
-        <div className="flex max-w-xl flex-1 flex-col items-center text-center lg:items-start lg:text-left">
-          <span className="mb-4 inline-block rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-medium tracking-wide text-primary">
-            Free Chrome Extension
+    <section
+      ref={ref}
+      className="manga-speed-lines manga-halftone manga-halftone-fade relative overflow-hidden py-24 md:py-32"
+    >
+      <div className={cn("relative z-10 mx-auto max-w-6xl px-4 manga-enter", inView && "in-view")}>
+        {/* Badge */}
+        <div className="mb-6">
+          <span className="manga-badge inline-block rounded-sm bg-primary/10 px-3 py-1 text-xs text-primary">
+            NOW WITH TAGS, LISTS & SMART FILTERING
           </span>
-
-          <h1 className="text-balance text-4xl leading-tight font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
-            Never lose track of your manga again
-          </h1>
-
-          <p className="mt-6 max-w-lg text-pretty leading-relaxed text-muted-foreground md:text-lg">
-            Checkpoint saves your reading progress for manga, manhwa, and manhua across any website.
-            One click. No accounts. No manual updates.
-          </p>
-
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Button asChild size="lg" className="gap-2">
-              <a
-                href="https://chromewebstore.google.com/detail/checkpoint/bomngiemgfgjnlpanapgbeimmihnjaka"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Chrome className="h-5 w-5" />
-                Install for Chrome
-              </a>
-            </Button>
-            <Button asChild variant="secondary" size="lg" className="gap-2">
-              <a
-                href="https://github.com/elghaied/checkpoint"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Github className="h-5 w-5" />
-                View Source
-              </a>
-            </Button>
-          </div>
-
-          <p className="mt-4 text-xs text-muted-foreground">
-            100% free &middot; Open source &middot; No sign-up required
-          </p>
         </div>
 
-        {/* Hero visual */}
-        <div className="relative flex-1">
-          <div className="relative mx-auto max-w-md overflow-hidden rounded-2xl border border-border shadow-2xl shadow-primary/5">
-            <Image
-              src="/images/hero-manga.png"
-              alt="A reader tracking their manga progress with Checkpoint"
-              width={500}
-              height={600}
-              className="h-auto w-full object-cover"
-              priority
-            />
-          </div>
+        {/* Headline */}
+        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold uppercase leading-[0.95] tracking-[-0.03em] mb-6">
+          YOUR{" "}
+          <span className="text-outline-primary">MANGA</span>{" "}
+          READING LIST, MINUS THE BS
+        </h1>
+
+        {/* Sub */}
+        <p className="max-w-2xl text-lg text-muted-foreground mb-8">
+          Checkpoint is a Chrome side panel that tracks what you&apos;re reading,
+          what chapter you&apos;re on, and what&apos;s got new chapters out. Works on
+          any site. No accounts. No BS.
+        </p>
+
+        {/* CTAs */}
+        <div className="flex flex-wrap items-center gap-4 mb-6">
+          <Button asChild className={cn("manga-btn-primary h-12 px-6 text-sm")}>
+            <a href={CHROME_STORE_URL} target="_blank" rel="noopener noreferrer">
+              <Chrome className="mr-2 h-4 w-4" />
+              Add to Chrome — free forever
+            </a>
+          </Button>
+          <Button asChild className={cn("manga-btn-secondary h-12 px-6 text-sm")}>
+            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+              <Github className="mr-2 h-4 w-4" />
+              See the source
+            </a>
+          </Button>
+        </div>
+
+        {/* Trust line */}
+        <p className="text-sm text-muted-foreground mb-16">
+          Open source · MIT licensed · Zero tracking · 100% local
+        </p>
+
+        {/* Hero image */}
+        <div className="manga-frame mx-auto max-w-3xl">
+          <Image
+            src="/images/hero-manga.png"
+            alt="Checkpoint Chrome extension side panel showing manga reading list"
+            width={1200}
+            height={800}
+            priority
+            className="w-full"
+          />
+        </div>
+
+        {/* 3-step strip */}
+        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
+          {steps.map((step) => (
+            <div key={step.num} className="border-l-2 border-primary pl-4">
+              <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-primary">
+                Step {step.num}
+              </span>
+              <h3 className="font-display text-lg font-bold uppercase mt-1">
+                {step.title}
+              </h3>
+              <p className="text-sm text-muted-foreground mt-1">{step.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
